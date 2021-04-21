@@ -1,25 +1,25 @@
 const express = require('express');
 const { animals } = require('./data/animals');
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3001;
 const app = express();
 
 function filterByQuery(query, animalsArray) {
   let personalityTraitsArray = [];
   let filteredResults = animalsArray;
-  if (query.personalityTraitsArray) {
-    if (typeof query.personalityTraitsArray === 'string') {
-      personalityTraitsArray = [query.personalityTraitsArray];
+  if (query.personalityTraits) {
+    if (typeof query.personalityTraits === 'string') {
+      personalityTraitsArray = [query.personalityTraits];
     } else {
-      personalityTraitsArray = query.personalityTraitsArray;
+      personalityTraitsArray = query.personalityTraits;
     }
     personalityTraitsArray.forEach(trait => {
       filteredResults = filteredResults.filter(
-        animal => animal.personalityTraitsArray.indexOf(trait) !== 1
-      )
-    })
+        animal => animal.personalityTraits.indexOf(trait) !== -1
+      );
+    });
   }
-  if(query.diet) {
+  if (query.diet) {
     filteredResults = filteredResults.filter(animal => animal.diet === query.diet);
   }
   if (query.species) {
@@ -29,17 +29,30 @@ function filterByQuery(query, animalsArray) {
     filteredResults = filteredResults.filter(animal => animal.name === query.name);
   }
   return filteredResults;
-};
+}
+
+function findById(id, animalsArray) {
+  const result = animalsArray.filter(animal => animal.id === id)[0];
+  return result;
+}
 
 app.get('/api/animals', (req, res) => {
   let results = animals;
   if (req.query) {
     results = filterByQuery(req.query, results);
   }
-  console.log(req.query)
   res.json(results);
 });
 
+app.get('/api/animals/:id', (req, res) => {
+  const result = findById(req.params.id, animals);
+  if (result) {
+    res.json(result);
+  } else {
+    res.send(404);
+  }
+});
+
 app.listen(PORT, () => {
-  console.log(`API server now on port ${PORT}`)
+  console.log(`API server now on port ${PORT}!`);
 });
