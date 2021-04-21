@@ -29,7 +29,7 @@ function filterByQuery(query, animalsArray) {
     filteredResults = filteredResults.filter(animal => animal.name === query.name);
   }
   return filteredResults;
-}
+};
 
 app.get('/api/animals', (req, res) => {
   let results = animals;
@@ -40,6 +40,6 @@ app.get('/api/animals', (req, res) => {
   res.json(results);
 });
 
-app.listen(3001, () => {
+app.listen(PORT, () => {
   console.log(`API server now on port ${PORT}`)
-})
+});
