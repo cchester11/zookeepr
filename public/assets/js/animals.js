@@ -31,10 +31,24 @@ const getAnimals = (formData = {}) => {
 
   console.log(queryUrl);
 
+  fetch(queryUrl) 
+  .then(response => {
+    if (response.ok) {
+      return response.json
+    } else if (!response.ok) {
+      return alert("Error: " + response.statusText);
+    }
+  })
+  .then(animalData => {
+    console.log(animalData);
+    //generate a card for each animal and send it to the page
+    printResults(animalData);
+  })
 };
 
 const handleGetAnimalsSubmit = event => {
   event.preventDefault();
+
   const dietRadioHTML = $animalForm.querySelectorAll('[name="diet"]');
   let diet;
 

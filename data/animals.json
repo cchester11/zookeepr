@@ -150,6 +150,15 @@
         "zany",
         "loving"
       ]
+    },
+    {
+      "name": "Abigale",
+      "species": "Buffalo",
+      "diet": "herbivore",
+      "personalityTraits": [
+        "loving"
+      ],
+      "id": "15"
     }
   ]
 }

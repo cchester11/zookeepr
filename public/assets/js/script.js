@@ -24,8 +24,33 @@ const handleAnimalFormSubmit = event => {
   for (let i = 0; i < selectedTraits.length; i += 1) {
     personalityTraits.push(selectedTraits[i].value);
   }
+  //convert input values into an array
   const animalObject = { name, species, diet, personalityTraits };
 
+//front end fetch request
+
+fetch('/api/animals', {
+  //declare the type of fetch by declaring the method
+  method: 'POST',
+  //let the fetch know were accepting JSON data
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json'
+  },
+  //we declare what the req.body will be
+  //the req.body is going to be the object of converted input values or (animalObject)
+  body: JSON.stringify(animalObject)
+})
+.then(response => {
+  if (response.ok) {
+    return response.json();
+  }
+  alert('Error: ' + response.statusText);
+})
+.then(postResponse => {
+  console.log(postResponse);
+  alert('Thank you for adding an animal!');
+})
 };
 
 $animalForm.addEventListener('submit', handleAnimalFormSubmit);
