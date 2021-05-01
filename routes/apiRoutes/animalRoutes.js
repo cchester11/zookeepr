@@ -4,6 +4,8 @@ const { animals } = require('../../data/animals')
 
 //we've configured server.js to call these routes accordingly when the user types <host>/api
 //for example <host>/api/animals would get the first router below. 
+
+//if a user is looking for a particular animal the conditional statement below finds that particular animal
 router.get('/animals', (req, res) => {
   let results = animals;
   if (req.query) {
@@ -22,7 +24,6 @@ router.get('/animals/:id', (req, res) => {
 });
 
 router.post('/animals', (req, res) => {
-  // set id based on what the next index of the array will be
   req.body.id = animals.length.toString();
 
   if (!validateAnimal(req.body)) {

@@ -128,37 +128,6 @@
         "zany",
         "loving"
       ]
-    },
-    {
-      "name": "Spindle",
-      "species": "bear",
-      "diet": "carnivore",
-      "personalityTraits": [
-        "hungry",
-        "zany",
-        "loving"
-      ],
-      "id": "13"
-    },
-    {
-      "id": "14",
-      "name": "Spindle",
-      "species": "bear",
-      "diet": "carnivore",
-      "personalityTraits": [
-        "hungry",
-        "zany",
-        "loving"
-      ]
-    },
-    {
-      "name": "Abigale",
-      "species": "Buffalo",
-      "diet": "herbivore",
-      "personalityTraits": [
-        "loving"
-      ],
-      "id": "15"
     }
   ]
 }

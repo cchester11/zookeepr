@@ -22,15 +22,20 @@ const printResults = resultArr => {
   $displayArea.innerHTML = animalHTML.join('');
 };
 
+//this function acts as a prototype until called in the handleSubmitForm
 const getAnimals = (formData = {}) => {
   let queryUrl = '/api/animals?';
 
+  //.entries method 
   Object.entries(formData).forEach(([key, value]) => {
+    //looks like were adding key value pairs from formData to the /api/animals? route. The /api/animals route host the entire json file of the animals info
+    //so this will help push the new info to the json
     queryUrl += `${key}=${value}&`;
   });
 
   console.log(queryUrl);
 
+  //we convert the data from the form into JSON
   fetch(queryUrl)
     .then(response => {
       if (!response.ok) {
